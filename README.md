@@ -16,7 +16,7 @@
 > Pre-configured environment keys (`.env`) and warm cache (`cache.json`) are already bundled.
 
 ### ⚡ env file:
-   **change '.env.example' to 'env'
+   ** Change 'env.example' to '.env'
 
    
 ### ⚡ 1-Click Launch:
