@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VouchAI | Evidence-Backed Professional Discovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header with Glassmorphism Blur -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <div class="logo-wrap">
+          <img src="logo.png" alt="VouchAI Logo" class="brand-logo-img">
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-row">
+            <h1>VouchAI</h1>
+            <span class="badge turbo-subtle">Turbo Node.js</span>
+          </div>
+          <p class="tagline">Enterprise professional discovery & quote-backed verification</p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <div id="status-pill" class="status-pill">
+          <span class="pulse-dot"></span>
+          <span id="status-text">Groq & TinyFish Ready</span>
+        </div>
+        <button id="theme-toggle" class="btn-icon" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      <!-- Left Panel: Parameters Sidebar -->
+      <aside class="sidebar-panel">
+        <div class="card panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              Discovery Criteria
+            </h2>
+            <span class="panel-badge">Parameters</span>
+          </div>
+
+          <form id="search-form">
+            <!-- Occupation -->
+            <div class="form-group">
+              <label for="occupation">Target Occupation</label>
+              <div class="select-wrapper">
+                <select id="occupation" class="form-select" required>
+                  <!-- Populated via JS -->
+                </select>
+                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+              <span class="form-hint">Select the profession to assess against public evidence</span>
+            </div>
+
+            <!-- Minimum Experience -->
+            <div class="form-group">
+              <label for="experience">Minimum Experience</label>
+              <div class="select-wrapper">
+                <select id="experience" class="form-select">
+                  <option value="1+ years">1+ years</option>
+                  <option value="3+ years">3+ years</option>
+                  <option value="5+ years" selected>5+ years</option>
+                  <option value="7+ years">7+ years</option>
+                  <option value="10+ years">10+ years</option>
+                </select>
+                <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Country & State Grid (8px grid spacing) -->
+            <div class="form-row">
+              <div class="form-group col-half">
+                <label for="country">Country</label>
+                <div class="select-wrapper">
+                  <select id="country" class="form-select" required>
+                    <!-- Populated via JS -->
+                  </select>
+                  <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="form-group col-half">
+                <label for="state">State / Region</label>
+                <div class="select-wrapper">
+                  <select id="state" class="form-select">
+                    <option value="">Any state</option>
+                  </select>
+                  <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Qualifications Chips -->
+            <div class="form-group">
+              <div class="group-header">
+                <label>Qualifications & Certifications</label>
+                <span id="quals-count" class="chip-count empty">0/4 selected</span>
+              </div>
+              <div id="quals-container" class="chips-grid">
+                <!-- Populated dynamically -->
+              </div>
+              <div id="quals-toggle-wrap" class="chips-toggle-wrap hidden">
+                <button type="button" id="btn-toggle-quals" class="btn-text-link">Show all options</button>
+              </div>
+            </div>
+
+            <!-- Specialties Chips -->
+            <div class="form-group">
+              <div class="group-header">
+                <label>Specialties & Practice Areas</label>
+                <span id="areas-count" class="chip-count active">1/4 selected</span>
+              </div>
+              <div id="areas-container" class="chips-grid">
+                <!-- Populated dynamically -->
+              </div>
+              <div id="areas-toggle-wrap" class="chips-toggle-wrap hidden">
+                <button type="button" id="btn-toggle-areas" class="btn-text-link">Show all specialties</button>
+              </div>
+            </div>
+
+            <!-- Advanced Settings Accordion -->
+            <details class="settings-accordion">
+              <summary class="settings-summary">
+                <div class="summary-left">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                  <span>Advanced Settings</span>
+                </div>
+                <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </summary>
+              <div class="settings-content">
+                <div class="setting-item">
+                  <div class="setting-label">
+                    <span>Websites to inspect</span>
+                    <span id="websites-count-label" class="setting-value">6</span>
+                  </div>
+                  <input type="range" id="websites-slider" min="3" max="10" value="6" class="form-range">
+                </div>
+
+                <div class="setting-item toggle-item">
+                  <div>
+                    <span class="setting-title">Verified LinkedIn profiles</span>
+                    <p class="setting-desc">Included only when corroborated by independent websites</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-linkedin" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item toggle-item">
+                  <div>
+                    <span class="setting-title">Accuracy mode (120B reasoning)</span>
+                    <p class="setting-desc">Runs deeper multi-step LLM evidence verification</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-accurate">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item toggle-item">
+                  <div>
+                    <span class="setting-title">Use local cache</span>
+                    <p class="setting-desc">Instant sub-5ms lookup for identical searches</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-cache" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item toggle-item">
+                  <div>
+                    <span class="setting-title">Debug information</span>
+                    <p class="setting-desc">Display raw diagnostic telemetry snippets</p>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-debug">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </details>
+
+            <!-- Sticky Find Providers Button -->
+            <div class="panel-sticky-actions">
+              <button type="submit" id="btn-submit" class="btn btn-primary">
+                <svg class="icon-search" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span class="spinner hidden" id="btn-spinner"></span>
+                <span id="btn-submit-text">Find Providers</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Right Panel: Results & Live Activity -->
+      <section class="results-panel">
+        <!-- Live Execution Card (Shown while running) -->
+        <div id="live-progress-card" class="card progress-card hidden">
+          <div class="progress-header">
+            <div class="progress-title-wrap">
+              <div class="loader-pulse"></div>
+              <div>
+                <h3 id="progress-stage-title">Searching live web...</h3>
+                <p id="progress-stage-desc">Executing parallel TinyFish agent queries</p>
+              </div>
+            </div>
+            <span id="progress-percent" class="progress-badge">Executing</span>
+          </div>
+
+          <div class="progress-bar-track">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+
+          <div class="pipeline-stepper">
+            <div class="step-node active" id="step-plan">
+              <span class="step-dot"></span>
+              <span class="step-label">Plan</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-node" id="step-search">
+              <span class="step-dot"></span>
+              <span class="step-label">Search</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-node" id="step-fetch">
+              <span class="step-dot"></span>
+              <span class="step-label">Fetch</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-node" id="step-judge">
+              <span class="step-dot"></span>
+              <span class="step-label">Judge</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-node" id="step-verify">
+              <span class="step-dot"></span>
+              <span class="step-label">Verify</span>
+            </div>
+          </div>
+
+          <!-- Streaming Activity Logs -->
+          <details class="logs-accordion" open>
+            <summary class="logs-summary">
+              <div class="logs-summary-left">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span>Live Engine Stream</span>
+              </div>
+              <span id="log-count" class="chip-count">0 events</span>
+            </summary>
+            <div id="logs-terminal" class="terminal-box">
+              <!-- Logs stream here -->
+            </div>
+          </details>
+        </div>
+
+        <!-- Initial Welcome Empty State (Carrying the Pitch & Skeleton Preview) -->
+        <div id="welcome-state" class="card empty-state">
+          <div class="empty-hero">
+            <!-- Pulsing Gradient-Ringed Icon -->
+            <div class="gradient-ring-icon-wrap">
+              <div class="gradient-ring-pulse"></div>
+              <div class="gradient-ring-inner">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="url(#hero-grad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <defs>
+                    <linearGradient id="hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#3B82F6"/>
+                      <stop offset="100%" stop-color="#8B5CF6"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+            </div>
+
+            <h3>Ready for Discovery</h3>
+            <p class="empty-subtitle">
+              Verify credentials, practice specialties, and professional standing backed by verbatim page evidence from public registries and websites.
+            </p>
+          </div>
+
+          <!-- Distinct Tinted Feature Pills -->
+          <div class="feature-pills">
+            <div class="pill pill-amber">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              Async Non-Blocking I/O
+            </div>
+            <div class="pill pill-cyan">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              TinyFish Web Agent
+            </div>
+            <div class="pill pill-pink">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              Groq Verified Quotes
+            </div>
+            <div class="pill pill-emerald">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              Anti-Hallucination Guard
+            </div>
+          </div>
+
+          <!-- Skeleton Preview of Evidence Dossier Card -->
+          <div class="skeleton-preview-wrap">
+            <div class="skeleton-preview-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+              PREVIEW OF VERIFIED RESULT DOSSIER
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton-card-top">
+                <div class="skeleton-identity">
+                  <div class="skeleton-avatar shimmer"></div>
+                  <div class="skeleton-lines">
+                    <div class="skeleton-line shimmer" style="width: 190px; height: 16px;"></div>
+                    <div class="skeleton-line shimmer" style="width: 280px; height: 11px; margin-top: 6px;"></div>
+                  </div>
+                </div>
+                <div class="skeleton-badge shimmer" style="width: 90px; height: 32px;"></div>
+              </div>
+              
+              <div class="skeleton-progress-bar shimmer"></div>
+
+              <div class="skeleton-criteria">
+                <div class="skeleton-criterion-row">
+                  <div class="skeleton-verdict-pill shimmer"></div>
+                  <div class="skeleton-line shimmer" style="width: 55%; height: 12px;"></div>
+                </div>
+                <div class="skeleton-quote-block shimmer"></div>
+                <div class="skeleton-criterion-row" style="margin-top: 10px;">
+                  <div class="skeleton-verdict-pill shimmer"></div>
+                  <div class="skeleton-line shimmer" style="width: 42%; height: 12px;"></div>
+                </div>
+              </div>
+
+              <div class="skeleton-contacts-bar shimmer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Container (Shown when results exist) -->
+        <div id="results-view" class="hidden">
+          <!-- Results Top Bar -->
+          <div class="results-header-bar">
+            <div>
+              <h2 id="results-count-title">Evidence-Supported Results (0)</h2>
+              <p class="results-subtext">All claims are strictly verified against verbatim quoted text from public pages.</p>
+            </div>
+            <div class="results-actions">
+              <span id="cache-badge" class="badge cache-badge hidden">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                Loaded from Cache (&lt;5ms)
+              </span>
+              <button id="btn-export-json" class="btn btn-secondary btn-sm" title="Export JSON">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export JSON
+              </button>
+              <button id="btn-export-csv" class="btn btn-secondary btn-sm" title="Export CSV">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+                Export CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Search Methodology Card -->
+          <details class="card methodology-card" open>
+            <summary class="methodology-summary">
+              <div class="methodology-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>Search Methodology & Query Plan</span>
+              </div>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <div class="methodology-content">
+              <div class="plan-section">
+                <h4>Assessed Criteria</h4>
+                <ul id="methodology-criteria" class="bullet-list"></ul>
+              </div>
+              <div class="plan-section">
+                <h4>Generated Search Queries</h4>
+                <ul id="methodology-queries" class="code-list"></ul>
+              </div>
+            </div>
+          </details>
+
+          <!-- Warning banner if any -->
+          <div id="warning-banner" class="alert alert-warning hidden"></div>
+
+          <!-- Provider Cards List -->
+          <div id="providers-list" class="providers-list">
+            <!-- Cards rendered dynamically -->
+          </div>
+
+          <!-- Debug JSON Card (if toggled) -->
+          <div id="debug-card" class="card debug-card hidden">
+            <h3>Debug Diagnostics</h3>
+            <pre id="debug-json"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

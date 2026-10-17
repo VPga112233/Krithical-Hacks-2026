@@ -1,0 +1,11 @@
+# Option 1 (Direct node command - works without any PowerShell errors):
+node server.js
+
+# Option 2 (Using npm command):
+npm.cmd start
+
+# Option 3 (Double click file in Windows Explorer):
+start.bat
+
+# If you want to enable "npm start" permanently in PowerShell, run once:
+# Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
